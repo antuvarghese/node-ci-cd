@@ -20,7 +20,7 @@ jobs:
         username: root
         password: ${{ secrets.TEST_PASSWORD }}
         port: 22
-
-    - name: Deploy to Linux Server
-      run: |
-        ssh -o StrictHostKeyChecking=no -i ${{ secrets.DEPLOY_SSH_KEY }} root@${{ secrets.TEST_SERVER_IP }} "docker pull antuvarghese/node:latest && docker run --name node -p 80:8080 -d antuvarghese/node"
+        script: |
+          docker pull antuvarghese/node:latest
+          docker run --name node -p 80:8080 -d antuvarghese/node
+          
