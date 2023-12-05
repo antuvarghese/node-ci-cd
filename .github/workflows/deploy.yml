@@ -21,6 +21,9 @@ jobs:
         password: ${{ secrets.TEST_PASSWORD }}
         port: 22
         script: |
+          docker container stop node
+          docker container rm node
+          docker image rm antuvarghese/node
           docker pull antuvarghese/node:latest
           docker run --name node -p 80:8080 -d antuvarghese/node
           
