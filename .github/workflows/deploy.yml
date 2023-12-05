@@ -1,9 +1,10 @@
-name: Deploy to Linux Server
+name: Deploy Workflow
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["Build Workflow"]
+    types:
+      - completed
 
 jobs:
   deploy:
@@ -13,7 +14,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up SSH
+    - name: Set up SSH and Run docker node image
       uses: appleboy/ssh-action@v1.0.0
       with:
         host: ${{ secrets.TEST_SERVER_IP }}
